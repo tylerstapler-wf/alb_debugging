@@ -14,7 +14,7 @@ parser.add_argument(
     help="The request to replay")
 
 parser.add_argument(
-    '--forever', dest="forever", action='store_true', help="Run forever")
+    '--forever', dest="forever", action='store_true', help="Run forever if set")
 
 parser.add_argument(
     '--target',
@@ -25,6 +25,7 @@ args = parser.parse_args()
 
 port = 443
 
+# Read our input file (sample-request.txt by default)
 with open(args.payload, 'rb') as f:
     request = f.read()
 
