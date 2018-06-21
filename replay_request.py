@@ -5,6 +5,9 @@ import socket
 import ssl
 import sys
 import time
+import signal
+
+from collections import Counter
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -21,6 +24,7 @@ parser.add_argument(
     dest="target",
     default='wk-de-WallA-2X2QIW2LFXR1-1345292554.us-east-1.elb.amazonaws.com')
 
+
 args = parser.parse_args()
 
 port = 443
@@ -35,8 +39,19 @@ REQUEST_PRINT_TEMPLATE = "Request {} {}"
 run_forever = args.forever
 request_count = 1
 
+
 # Get all the ips assocated with hostname
 hostname, aliaslist, ipaddrlist = socket.gethostbyname_ex(args.target)
+
+counts = Counter()
+
+def signal_handler(signal, frame):
+        print("Requests:")
+        print(counts)
+        sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
 
 while True:
     for ip in ipaddrlist:
@@ -57,17 +72,22 @@ while True:
         if response.startswith(b"HTTP/1.1 502"):
             print(REQUEST_PRINT_TEMPLATE.format(request_count, "Mangled:"))
             print(response)
+            counts["Mangled"] += 1
             if not run_forever:
                 sys.exit(1)
         elif response.startswith(b"HTTP/1.1 400"):
             print(REQUEST_PRINT_TEMPLATE.format(request_count, "Rejected:"))
             print(response)
+            counts["Rejected"] += 1
             if not run_forever:
                 sys.exit(1)
         else:
             print(REQUEST_PRINT_TEMPLATE.format(request_count, "Okay"))
+            counts["Okay"] += 1
 
         # CLOSE SOCKET CONNECTION
         wrappedSocket.close()
         request_count += 1
         time.sleep(.2)
+
+print(counts)
