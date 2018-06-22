@@ -58,13 +58,14 @@ Connection: keep-alive
 ![Request Timeline](./ALB_request_timeline.png)
 
 
-**Request Timeline Legend**:
-
-Request A: sample-request.txt
-Request B: sample-request.txt with “Transfer Encoding: chunked” replaced with “Content-Length: 16428” and chunk sizes removed.
-Request C: sample-request.txt with “Transfer Encoding: chunked” header, but chunk sizes removed.
-Response X: Expected 401 Response from our backend (HAProxy)
-Response Y: 502 Response from ALB
+| Requests   | Explanations                                                                                                        |
+|------------|---------------------------------------------------------------------------------------------------------------------|
+|            |                                                                                                                     |
+| Request A  | sample-request.txt                                                                                                  |
+| Request B  | sample-request.txt with “Transfer Encoding: chunked” replaced with “Content-Length: 16428” and chunk sizes removed. |
+| Request C  | sample-request.txt with “Transfer Encoding: chunked” header, but chunk sizes removed.                               |
+| Response X | Expected 401 Response from our backend (HAProxy)                                                                    |
+| Response Y | 502 Response from ALB                                                                                               |
 
 ## Repo Files
 *replay_request.py* - A python script for replaying HTTP requests
