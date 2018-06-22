@@ -22,7 +22,7 @@ parser.add_argument(
 parser.add_argument(
     '--target',
     dest="target",
-    default='wk-de-WallA-2X2QIW2LFXR1-1345292554.us-east-1.elb.amazonaws.com')
+    default='wk-de-WallA-2X2QIW2LFXR1-1345292554.us-east-1.elb.amazonaws.com', help="The target ALB DNS name")
 
 
 args = parser.parse_args()
@@ -62,7 +62,7 @@ while True:
         wrappedSocket = ssl.wrap_socket(
             sock,
             ssl_version=ssl.PROTOCOL_TLSv1_2,
-            ciphers='ECDHE-RSA-AES128-GCM-SHA256')
+            ciphers='AES128-GCM-SHA256')
         # CONNECT AND PRINT REPLY
         print("Connecting to {}:{}".format(ip, port))
         wrappedSocket.connect((ip, port))
