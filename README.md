@@ -68,6 +68,8 @@ Connection: keep-alive
 | Response Y | 502 Response from ALB                                                                                               |
 
 ## Repo Files
-*replay_request.py* - A python script for replaying HTTP requests
-*sample-request.txt* - A raw HTTP request which received a 502 response.
-*sample-request-without-chunk-sizes.txt* - A raw HTTP request which received a 502 response with the chunk sizes removed. This request is intended to demonstrate that the payload the ALB forwards to our backend is invalid. If you send it to the ALB you will get a "400 Bad Request error".
+| File Name                              | Explanation                                                                                                                                                                                                                                           |
+|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| replay_request.py                      | A python script for replaying HTTP requests                                                                                                                                                                                                           |
+| sample-request.txt                     | A raw HTTP request which received a 502 response.                                                                                                                                                                                                     |
+| sample-request-without-chunk-sizes.txt | A raw HTTP request which received a 502 response with the chunk sizes removed. This request is intended to demonstrate that the payload the ALB forwards to our backend is invalid. If you send it to the ALB you will get a "400 Bad Request error". |
