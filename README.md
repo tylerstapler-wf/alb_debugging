@@ -29,7 +29,7 @@ docker build . -t alb_debugging && docker run --rm -it alb_debugging
 
 Running the ./replay_request.py script will open a TLS socket to the ALB and write a captured HTTP payload from a file (sample-request.txt) then close the socket. 
 
-The expected response is 401 errors (We changed the auth tokens in the request to all Xs). The script will continue sending requests to the ALB until it encounters a 502 error, it will then priint the error and exit.
+The expected response is 401 errors (We changed the auth tokens in the request to all Xs). The script will continue sending requests to the ALB until it encounters a 502 error, it will then print the error and exit.
 
 ```
 $ ./replay_request.py
